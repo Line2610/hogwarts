@@ -1,0 +1,21 @@
+info:
+  name: new student
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:3000/students
+  auth: inherit
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Ron Weasley",
+        "house_id": 1
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
