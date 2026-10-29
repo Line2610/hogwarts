@@ -3,7 +3,9 @@ CREATE SCHEMA hogwarts;
 
 CREATE TABLE hogwarts.houses (
   id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name text NOT NULL UNIQUE
+  name text NOT NULL UNIQUE,
+  color text NOT NULL,
+  founder text NOT NULL
 );
 
 CREATE TABLE hogwarts.teachers (
@@ -30,11 +32,18 @@ CREATE TABLE hogwarts.course_students (
   PRIMARY KEY (course_id, student_id)
 );
 
-INSERT INTO hogwarts.houses (name) VALUES
-  ('Gryffindor'), ('Ravenclaw'), ('Hufflepuff'), ('Slytherin');
+INSERT INTO hogwarts.houses (name, color, founder) VALUES
+  ('Gryffindor', 'Red and gold', 'Godric Gryffindor'),
+  ('Ravenclaw', 'Blue and bronze', 'Rowena Ravenclaw'),
+  ('Hufflepuff', 'Yellow and black', 'Helga Hufflepuff'),
+  ('Slytherin', 'Green and silver', 'Salazar Slytherin');
 
 INSERT INTO hogwarts.teachers (name, house_id) VALUES
-  ('Minerva McGonagall', 1), ('Filius Flitwick', 2);
+  ('Minerva McGonagall', 1),
+  ('Filius Flitwick', 2),
+  ('Pomona Sprout', 3),
+  ('Severus Snape', 4),
+  ('Alastor Moody', 1);
 
 INSERT INTO hogwarts.students (name, house_id) VALUES
   ('Harry Potter', 1),
