@@ -1,15 +1,15 @@
 import { Router } from "express";
 import * as coursesController from "../controllers/courses.controller.js";
 
-const router = Router();
+const coursesRouter = Router();
 
-router.get("/", coursesController.getAllCourses);
-router.get("/:id", coursesController.getCourseById);
-router.post("/", coursesController.createCourse);
-router.put("/:id", coursesController.updateCourse);
-router.put("/:id/teacher", coursesController.changeCourseTeacher);
-router.put("/:id/students/:studentId", coursesController.addStudentToCourse);
-router.delete("/:id/students/:studentId", coursesController.removeStudentFromCourse);
-router.delete("/:id", coursesController.deleteCourse);
+coursesRouter.get("/", coursesController.getAllCourses);
+coursesRouter.get("/:id", coursesController.getCourseById);
+coursesRouter.post("/", coursesController.createCourse);
+coursesRouter.put("/:id", coursesController.updateCourse);
+coursesRouter.put("/:id/teacher", coursesController.changeCourseTeacher);
+coursesRouter.put("/:id/students/:studentId", coursesController.addStudentToCourse);
+coursesRouter.delete("/:id/students/:studentId", coursesController.removeStudentFromCourse);
+coursesRouter.delete("/:id", coursesController.deleteCourse);
 
-export default router;
+export default coursesRouter;

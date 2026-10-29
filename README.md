@@ -1,14 +1,3 @@
-# Hogwarts Course Management API
-
-## Start
-
-1. Opret en PostgreSQL-database med navnet `hogwarts`.
-2. Kopiér `.env.example` til `.env` og udfyld PostgreSQL-oplysningerne.
-3. Åbn `database/hogwarts.sql` i pgAdmin Query Tool og kør hele filen.
-4. Kør `npm install`.
-5. Kør `npm start`.
-
-Serveren starter på `http://localhost:3000`.
 
 ## Endpoints
 
@@ -37,11 +26,5 @@ Serveren starter på `http://localhost:3000`.
 
 ## Endpoint-tests i Bruno
 
-Mappen [`hogwarts/`](./hogwarts/) er en Bruno/OpenCollection-samling. Åbn mappen i Bruno, start serveren først med `npm start`, og send requests én ad gangen. Kør først GET-requests, så du kender id'erne, før du kører PUT og DELETE. Samlingen indeholder requests til alle endpoints, inklusive de ekstra course-endpoints.
+I mappen hogwarts/ er testene. De åbenes i Bruno, hvor jeg starter med at køre npm start, og tester derefter endpoints én ad gangen. Jeg starter med GET for at finde ID’erne, og så derefter PUT og DELETE.
 
-## Mapper
-
-- `routes`: URL'er og HTTP-metoder
-- `controllers`: request og response
-- `services`: ekstra logik
-- `repositories`: SQL
