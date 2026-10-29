@@ -1,5 +1,4 @@
 import * as coursesRepository from "../repositories/courses.repository.js";
-import * as coursesService from "../services/courses.service.js";
 
 export async function getAllCourses(_request, response, next) {
   try {
@@ -47,7 +46,7 @@ export async function updateCourse(request, response, next) {
 
 export async function changeCourseTeacher(request, response, next) {
   try {
-    const course = await coursesService.changeCourseTeacher(
+    const course = await coursesRepository.changeCourseTeacher(
       request.params.id,
       request.body.teacher_id,
     );
@@ -60,7 +59,7 @@ export async function changeCourseTeacher(request, response, next) {
 
 export async function addStudentToCourse(request, response, next) {
   try {
-    const courseStudent = await coursesService.addStudentToCourse(
+    const courseStudent = await coursesRepository.addStudentToCourse(
       request.params.id,
       request.params.studentId,
     );
@@ -72,7 +71,7 @@ export async function addStudentToCourse(request, response, next) {
 
 export async function removeStudentFromCourse(request, response, next) {
   try {
-    const deleted = await coursesService.removeStudentFromCourse(
+    const deleted = await coursesRepository.removeStudentFromCourse(
       request.params.id,
       request.params.studentId,
     );

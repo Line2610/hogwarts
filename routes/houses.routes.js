@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as housesController from "../controllers/houses.controller.js";
 
-const housesRouter = express.Router();
+const housesRouter = Router();
 
 housesRouter.get("/", housesController.getAllHouses);
 housesRouter.get("/:id", housesController.getSingleHouse);
