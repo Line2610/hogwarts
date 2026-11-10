@@ -1,5 +1,6 @@
 import express from "express";
 
+import errorhandler from "./controllers/errorhandling/errorhandling.js";
 import housesRoutes from "./routes/houses.routes.js";
 import teachersRoutes from "./routes/teachers.routes.js";
 import studentsRoutes from "./routes/students.routes.js";
@@ -11,6 +12,10 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.listen(port, () => {
+  console.log(`server kører på http://localhost:${port}`);
+});
+
 app.use("/houses", housesRoutes);
 app.use("/teachers", teachersRoutes);
 app.use("/students", studentsRoutes);
@@ -20,6 +25,6 @@ app.get("/", (_req, res) => {
   res.send("Hogwarts API");
 });
 
-app.listen(port, () => {
-  console.log(`server kører på http://localhost:${port}`);
-});
+app.use(errorhandler);
+
+
