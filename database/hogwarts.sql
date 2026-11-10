@@ -205,5 +205,31 @@ ALTER TABLE ONLY hogwarts.teachers
     ADD CONSTRAINT teachers_pkey PRIMARY KEY (id);
 
 
+ALTER TABLE ONLY hogwarts.course_students
+    ADD CONSTRAINT course_students_course_id_fkey
+    FOREIGN KEY (course_id) REFERENCES hogwarts.courses(id)
+    ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY hogwarts.course_students
+    ADD CONSTRAINT course_students_student_id_fkey
+    FOREIGN KEY (student_id) REFERENCES hogwarts.students(id)
+    ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY hogwarts.courses
+    ADD CONSTRAINT courses_teacher_id_fkey
+    FOREIGN KEY (teacher_id) REFERENCES hogwarts.teachers(id);
+
+
+ALTER TABLE ONLY hogwarts.students
+    ADD CONSTRAINT students_house_id_fkey
+    FOREIGN KEY (house_id) REFERENCES hogwarts.houses(id);
+
+
+ALTER TABLE ONLY hogwarts.teachers
+    ADD CONSTRAINT teachers_house_id_fkey
+    FOREIGN KEY (house_id) REFERENCES hogwarts.houses(id);
+
 
 \unrestrict 6prZxWIPTOXaC3rxWNho5Yiye5nmQmGFqj3bVx2oniQKt1MEm527ebNHEkdwrzV
