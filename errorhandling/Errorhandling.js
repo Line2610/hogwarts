@@ -1,15 +1,19 @@
-export default (err, _request, response, _next) => {
-  console.error(err);
-
+export default (err, req, res, next) => {
   const statusCode = err.statusCode || 500;
-  let error = "Internal Server Error";
+  let error = err.error || "Internal Server Error";
   const message = err.message || "Something went wrong";
 
   if (statusCode === 404) {
     error = "Not Found";
-  } else if (statusCode === 400) {
+  } else if (err.statusCode === 400) {
     error = "Bad Request";
   }
 
-  response.status(statusCode).json({ message, error, statusCode });
+  res.status(statusCode).json(
+    {
+      message: message,
+      error: error,
+      statusCode: statusCode,
+    }
+  );
 };
