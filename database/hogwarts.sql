@@ -102,7 +102,7 @@ ALTER TABLE hogwarts.students ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 CREATE TABLE hogwarts.teachers (
     id integer NOT NULL,
     name text NOT NULL,
-    house_id integer NOT NULL
+    house_id integer
 );
 
 

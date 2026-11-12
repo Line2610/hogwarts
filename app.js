@@ -1,6 +1,5 @@
 import express from "express";
-
-import errorhandler from "./controllers/errorhandling/errorhandling.js";
+import errorhandler from "./errorhandling/Errorhandling.js";
 import housesRoutes from "./routes/houses.routes.js";
 import teachersRoutes from "./routes/teachers.routes.js";
 import studentsRoutes from "./routes/students.routes.js";
@@ -26,5 +25,3 @@ app.get("/", (_req, res) => {
 });
 
 app.use(errorhandler);
-
-
