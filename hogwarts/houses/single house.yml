@@ -1,10 +1,11 @@
 info:
   name: single house
   type: http
+  seq: 1
 
 http:
   method: GET
-  url: http://localhost:3000/houses/2
+  url: http://localhost:3000/houses/hj
   auth: inherit
 
 settings:
@@ -12,4 +13,3 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
-​
