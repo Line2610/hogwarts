@@ -1,55 +1,35 @@
 import * as studentsRepository from "../repositories/students.repository.js";
+import HTTPError from "../errorhandling/HTTPError.js";
 
-export async function getAllStudents(_request, response, next) {
-  try {
-    response.status(200).json(await studentsRepository.getAllStudents());
-  } catch (error) {
-    next(error);
-  }
+export async function getAllStudents(_req, res) {
+  res.status(200).json(await studentsRepository.getAllStudents());
 }
 
-export async function getStudentById(request, response, next) {
-  try {
-    const student = await studentsRepository.getStudentById(request.params.id);
-    if (!student) return response.sendStatus(404);
-    response.status(200).json(student);
-  } catch (error) {
-    next(error);
+export async function getStudentById(req, res) {
+  const student = await studentsRepository.getStudentById(req.params.id);
+  if (student) {
+    return res.status(200).json(student);
   }
+  throw new HTTPError(404, "Student not found");
 }
 
-export async function createStudent(request, response, next) {
-  try {
-    const student = await studentsRepository.createStudent(
-      request.body.name,
-      request.body.house_id,
-    );
-    response.status(201).json(student);
-  } catch (error) {
-    next(error);
-  }
+export async function createStudent(req, res) {
+  const student = await studentsRepository.createStudent(req.body.name, req.body.house_id);
+  res.status(201).json(student);
 }
 
-export async function updateStudent(request, response, next) {
-  try {
-    const student = await studentsRepository.updateStudent(
-      request.params.id,
-      request.body.name,
-      request.body.house_id,
-    );
-    if (!student) return response.sendStatus(404);
-    response.status(200).json(student);
-  } catch (error) {
-    next(error);
+export async function updateStudent(req, res) {
+  const student = await studentsRepository.updateStudent(req.params.id, req.body.name, req.body.house_id);
+  if (!student) {
+    throw new HTTPError(404, "Student not found");
   }
+  res.status(200).json(student);
 }
 
-export async function deleteStudent(request, response, next) {
-  try {
-    const deleted = await studentsRepository.deleteStudent(request.params.id);
-    if (!deleted) return response.sendStatus(404);
-    response.sendStatus(204);
-  } catch (error) {
-    next(error);
+export async function deleteStudent(req, res) {
+  const deleted = await studentsRepository.deleteStudent(req.params.id);
+  if (!deleted) {
+    throw new HTTPError(404, "Student not found");
   }
+  res.sendStatus(204);
 }
