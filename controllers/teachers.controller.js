@@ -1,5 +1,6 @@
 import * as teachersRepository from "../repositories/teachers.repository.js";
 import HTTPError from "../errorhandling/HTTPError.js";
+import UpdateTeacherDto from "../dtos/Updateteacher.dto.js";
 
 export async function getAllTeachers(_req, res) {
   res.status(200).json(await teachersRepository.getAllTeachers());
@@ -14,16 +15,19 @@ export async function getTeacherById(req, res) {
 }
 
 export async function createTeacher(req, res) {
-  const teacher = await teachersRepository.createTeacher(req.body.name, req.body.house_id);
+  const teacher = await teachersRepository.createTeacher(req.body);
   res.status(201).json(teacher);
 }
 
 export async function updateTeacher(req, res) {
-  const teacher = await teachersRepository.updateTeacher(req.params.id, req.body.name, req.body.house_id);
-  if (!teacher) {
-    throw new HTTPError(404, "Teacher not found");
+  const teacher = UpdateTeacherDto.parse(req.body);
+  const updatedTeacher = await teachersRepository.updateTeacher(req.params.id, teacher);
+
+  if (updatedTeacher) {
+    return res.status(200).json(updatedTeacher);
   }
-  res.status(200).json(teacher);
+
+  throw new HTTPError(404, "No teacher to update");
 }
 
 export async function deleteTeacher(req, res) {

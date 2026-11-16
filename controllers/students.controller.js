@@ -14,12 +14,12 @@ export async function getStudentById(req, res) {
 }
 
 export async function createStudent(req, res) {
-  const student = await studentsRepository.createStudent(req.body.name, req.body.house_id);
+  const student = await studentsRepository.createStudent(req.body);
   res.status(201).json(student);
 }
 
 export async function updateStudent(req, res) {
-  const student = await studentsRepository.updateStudent(req.params.id, req.body.name, req.body.house_id);
+  const student = await studentsRepository.updateStudent(req.params.id, req.body);
   if (!student) {
     throw new HTTPError(404, "Student not found");
   }

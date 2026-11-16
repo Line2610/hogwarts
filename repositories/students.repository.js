@@ -15,21 +15,21 @@ export async function getStudentById(id) {
   return result.rows[0];
 }
 
-export async function createStudent(name, houseId) {
+export async function createStudent(student) {
   const result = await pool.query(
     "INSERT INTO hogwarts.students (name, house_id) VALUES ($1, $2) RETURNING *",
-    [name, houseId],
+    [student.name, student.house_id],
   );
   return result.rows[0];
 }
 
-export async function updateStudent(id, name, houseId) {
+export async function updateStudent(id, student) {
   const result = await pool.query(
     `UPDATE hogwarts.students
      SET name = $1, house_id = $2
      WHERE id = $3
      RETURNING *`,
-    [name, houseId, id],
+    [student.name, student.house_id, id],
   );
   return result.rows[0];
 }

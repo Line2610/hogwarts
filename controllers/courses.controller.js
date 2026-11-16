@@ -14,19 +14,12 @@ export async function getCourseById(req, res) {
 }
 
 export async function createCourse(req, res) {
-  const course = await coursesRepository.createCourse(
-    req.body.name,
-    req.body.teacher_id,
-  );
+  const course = await coursesRepository.createCourse(req.body);
   res.status(201).json(course);
 }
 
 export async function updateCourse(req, res) {
-  const course = await coursesRepository.updateCourse(
-    req.params.id,
-    req.body.name,
-    req.body.teacher_id,
-  );
+  const course = await coursesRepository.updateCourse(req.params.id, req.body);
   if (!course) {
     throw new HTTPError(404, "Course not found");
   }
@@ -34,10 +27,7 @@ export async function updateCourse(req, res) {
 }
 
 export async function changeCourseTeacher(req, res) {
-  const course = await coursesRepository.changeCourseTeacher(
-    req.params.id,
-    req.body.teacher_id,
-  );
+  const course = await coursesRepository.changeCourseTeacher(req.params.id, req.body.teacher_id);
   if (!course) {
     throw new HTTPError(404, "Course not found");
   }
@@ -45,18 +35,12 @@ export async function changeCourseTeacher(req, res) {
 }
 
 export async function addStudentToCourse(req, res) {
-  const courseStudent = await coursesRepository.addStudentToCourse(
-    req.params.id,
-    req.params.studentId,
-  );
+  const courseStudent = await coursesRepository.addStudentToCourse(req.params.id, req.params.studentId);
   res.status(201).json(courseStudent);
 }
 
 export async function removeStudentFromCourse(req, res) {
-  const deleted = await coursesRepository.removeStudentFromCourse(
-    req.params.id,
-    req.params.studentId,
-  );
+  const deleted = await coursesRepository.removeStudentFromCourse(req.params.id, req.params.studentId);
   if (!deleted) {
     throw new HTTPError(404, "Student is not enrolled in course");
   }

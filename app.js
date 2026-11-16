@@ -1,9 +1,9 @@
 import express from "express";
 import errorhandler from "./errorhandling/Errorhandling.js";
-import housesRoutes from "./routes/houses.routes.js";
-import teachersRoutes from "./routes/teachers.routes.js";
-import studentsRoutes from "./routes/students.routes.js";
-import coursesRoutes from "./routes/courses.routes.js";
+import housesRoutes from "./routers/houses.router.js";
+import teachersRoutes from "./routers/teachers.router.js";
+import studentsRoutes from "./routers/students.router.js";
+import coursesRoutes from "./routers/courses.router.js";
 
 const app = express();
 const port = 3000;

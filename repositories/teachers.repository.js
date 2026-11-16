@@ -22,20 +22,30 @@ export async function getTeacherById(id) {
   return result.rows[0];
 }
 
-export async function createTeacher(name, houseId) {
-  const result = await pool.query("INSERT INTO hogwarts.teachers (name, house_id) VALUES ($1, $2) RETURNING *", [name, houseId]);
-  return result.rows[0];
+export async function createTeacher(teacher) {
+  const result = await pool.query(
+    /*sql*/ `INSERT INTO hogwarts.teachers (name, house_id) 
+    VALUES ($1, $2) RETURNING id`,
+    [teacher.name, teacher.house_id],
+  );
+
+  return getTeacherById(result.rows[0].id);
 }
 
-export async function updateTeacher(id, name, houseId) {
+export async function updateTeacher(id, teacher) {
   const result = await pool.query(
-    `UPDATE hogwarts.teachers
+    /*sql*/ `UPDATE hogwarts.teachers
      SET name = $1, house_id = $2
      WHERE id = $3
-     RETURNING *`,
-    [name, houseId, id],
+     RETURNING id`,
+    [teacher.name, teacher.house_id, id],
   );
-  return result.rows[0];
+
+  if (result.rowCount === 0) return null; // Teacher not found
+
+  const updatedTeacher = result.rows[0].id;
+
+  return getTeacherById(updatedTeacher); // Fetch the updated teacher with house name
 }
 
 export async function deleteTeacher(id) {
